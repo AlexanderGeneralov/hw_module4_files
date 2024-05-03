@@ -45,17 +45,27 @@ def create_cook_book(recipe_file): # create cook book from recipes file
         cook_book[key] = lst
     # pprint.pp(cook_book, width=150) # use this to check if function correctly works
     return cook_book
-    
+
 def get_shop_list_by_dishes(dishes, person_count):
-    pass
-
-
+    shop_list = {}
+    for dish in dishes:
+        if dish not in cook_book: 
+            print(f"Блюда {dish} нет в книге рецептов")
+            continue
+        for ingredient in cook_book[dish]:
+            if ingredient["ingredient_name"] not in shop_list: #check if same ingredients in different dishes
+                shop_list.update({ingredient["ingredient_name"] : {"measure" : ingredient["measure"], "quantity" : ingredient["quantity"] * person_count}})
+            else:
+                shop_list[ingredient["ingredient_name"]]["quantity"] += ingredient["quantity"] * person_count
+    #pprint.pp(shop_list) # use this to check if function correctly works
+    return shop_list
+    
 # add_new_rec() # use this tupdate recipe.txt file with new recipe  
 # add_new_rec() # use this tupdate recipe.txt file with new recipe   
 # add_new_rec() # use this tupdate recipe.txt file with new recipe  
 # add_new_rec() # use this tupdate recipe.txt file with new recipe 
             
-# create_cook_book("recipes.txt")
-        
+#cook_book = create_cook_book("recipes.txt")
+#get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', "test"], 2)        
 
     
