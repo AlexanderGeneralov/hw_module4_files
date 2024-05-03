@@ -54,10 +54,10 @@ def get_shop_list_by_dishes(dishes, person_count):
             continue
         for ingredient in cook_book[dish]:
             if ingredient["ingredient_name"] not in shop_list: #check if same ingredients in different dishes
-                shop_list.update({ingredient["ingredient_name"] : {"measure" : ingredient["measure"], "quantity" : ingredient["quantity"] * person_count}})
+                shop_list.update({ingredient["ingredient_name"] : {"measure" : ingredient["measure"], "quantity" : int(ingredient["quantity"]) * person_count}})
             else:
-                shop_list[ingredient["ingredient_name"]]["quantity"] += ingredient["quantity"] * person_count
-    #pprint.pp(shop_list) # use this to check if function correctly works
+                shop_list[ingredient["ingredient_name"]]["quantity"] += int(ingredient["quantity"]) * person_count
+    pprint.pp(shop_list) # use this to check if function correctly works
     return shop_list
     
 # add_new_rec() # use this tupdate recipe.txt file with new recipe  
@@ -65,7 +65,7 @@ def get_shop_list_by_dishes(dishes, person_count):
 # add_new_rec() # use this tupdate recipe.txt file with new recipe  
 # add_new_rec() # use this tupdate recipe.txt file with new recipe 
             
-#cook_book = create_cook_book("recipes.txt")
-#get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', "test"], 2)        
+cook_book = create_cook_book("recipes.txt")
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', "test"], 2)        
 
     
